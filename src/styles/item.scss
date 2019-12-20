@@ -1,0 +1,42 @@
+@import "variables.scss";
+@import "./fontawesome/fontawesome.scss";
+@import "./fontawesome/solid.scss";
+
+.item {
+    border: $border-color solid 1px;
+    margin: 5px;
+    font-family: $font-text;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        background-color: $header-background-color;
+        color: $header-text-color;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    &__content {
+        display: flex;
+        padding: 10px;
+    }
+
+    &__date-published {
+        display: flex;
+        flex-direction: row-reverse;
+        padding: 10px;
+    }
+
+    &__logo{
+        &_close {
+            padding-top: 10px;
+            padding-left: 10px;
+            cursor: pointer;
+        }
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+        width: calc(100% - 10px);
+        margin-right: 0px;
+    }
+}

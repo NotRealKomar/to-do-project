@@ -1,0 +1,66 @@
+@import "variables.scss";
+@import "./fontawesome/fontawesome.scss";
+@import "./fontawesome/solid.scss";
+
+.list {
+    display: flex;
+    padding: 10px 50px 0px 50px;
+    justify-content: space-between;
+
+    @media (max-width: $breakpoint-mobile) {
+        padding-left: 0px;
+        padding-right: 0px;
+        display: block;
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+        padding-left: 0px;
+        padding-right: 0px;
+        display: block;
+    }
+
+    &__main {
+        display: flex;
+        width: 100%;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        border: $border-color solid 1px;
+
+        @media (max-width: $breakpoint-tablet) {
+            flex-direction: row-reverse;
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+
+        @media (max-width: $breakpoint-mobile) {
+            border: none;
+        }
+    }
+
+    &__info {
+        display: flex;
+        min-width: 250px;
+        height: auto;
+
+        font-family: $font-text;
+        font-size: x-large;
+        color: $info-text-color;
+        margin: 0px 50px 50px 50px;
+        padding-right: 50px;
+        padding-left: 10px;
+        background-color: $info-background-color;
+
+        @media (max-width: $breakpoint-mobile) {
+            padding-right: 0px;
+            margin: 0px;
+            font-size: medium;
+        }
+
+        @media (max-width: $breakpoint-tablet) {
+            width: calc(100% - 18px);
+            padding-right: 10px;
+            margin: 0px;
+        }
+    }
+}
+

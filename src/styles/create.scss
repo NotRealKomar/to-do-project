@@ -1,0 +1,51 @@
+@import "variables.scss";
+
+.create-form {
+    width: fit-content;
+    margin-top: 10px;
+    margin-left: 50px;
+
+    @media (max-width: $breakpoint-tablet) {
+        margin-left: 0px;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        background-color: $header-background-color;
+        color: $header-text-color;
+        padding-left: 10px;
+        font-family: $font-text;
+    }
+
+    &__input {
+        border: 2px solid $border-color;
+        display: inline-flex;
+        font-family: $font-text;
+        padding-left: 10px;
+
+        @media (max-width: $breakpoint-mobile) {
+            width: calc(100% - 14px);
+        }
+    }
+
+    &__button {
+        display: inline-flex;
+        border: 2px solid $border-color;
+        background-color: $button-color;
+        color: $info-text-color;
+        font-family: $font-text;
+        border-radius: 2px;
+        transition-duration: 0.4s;
+
+        @media (max-width: $breakpoint-mobile) {
+            justify-content: center;
+            width: 100%;
+        }
+
+        &:hover{
+            background-color: $info-text-color;
+            color: $button-color;
+        }
+    }
+}
