@@ -4,48 +4,34 @@ import Item from "./Item";
 import Header from "./Header";
 import ToDo from "../models/ToDo";
 import Create from "./Create";
-import { Guid } from "guid-typescript";
-import * as toDoService from "../services/toDoService";
+import { connect } from "react-redux";
+import { ToDoState } from "../reducers/todoReducer";
+import { getItems, removeItem } from "../actions/todoActions";
 
-interface IState {
-  items: ToDo[];
+interface IProps {
+  getItems: Function,
+  removeItem: Function,
+  items: ToDo[]
 }
 
-class ToDoList extends React.Component<{}, IState> {
-  constructor(props: any){
-    super(props);
-
-    toDoService.clearItems();
-    for (let i = 0; i < 85; i++) {
-      toDoService.addItem(new ToDo(Guid.create().toString(), `test - ${i}`, "Lorem Ipsum blablabla"));
-    }
-
-    this.state = {
-      items: toDoService.getItems(),
-    }
-  };
-
-  handleOnCrossClick = (id: string) => {
-    this.setState({
-      items: toDoService.removeItem(id),
-    });
+class ToDoList extends React.Component<IProps> {
+  componentDidMount() {
+    this.props.getItems();
   }
 
-  handleCreateToDo = (item: ToDo) => {
-    this.setState({
-      items: toDoService.addItem(item)
-    });
+  handleOnRemove = (id: string) => {
+    this.props.removeItem(id);
   }
 
   render() {
     return (
       <>
-        <Header/>
-        <Create onSubmit={this.handleCreateToDo}/>
+        <Header />
+        <Create />
         <div className="list">
           <div className="list__main">
-            {this.state.items.map(item => 
-              <Item key={item.id} item={item} onClick={this.handleOnCrossClick}/>
+            {this.props.items && this.props.items.map(item => 
+              <Item key={item.id} item={item} onClick={this.handleOnRemove}/>
             )}
           </div>
           <div className="list__info">
@@ -53,7 +39,7 @@ class ToDoList extends React.Component<{}, IState> {
               <h3>To-Do's</h3>
               <hr/>
               <li>
-                {this.state.items.length} to-do's
+                {(this.props.items) ? (this.props.items.length) : (<span>No</span>)} to-do's
                 [<i className="fas fa-thumbs-up"></i>]
               </li>
               <li>
@@ -68,4 +54,10 @@ class ToDoList extends React.Component<{}, IState> {
   }
 }
 
-export default ToDoList;
+const mapStateToProps = (state: ToDoState) => {
+  return {
+    items: state.toDo.items,
+  }
+}
+
+export default connect( mapStateToProps, { getItems, removeItem })(ToDoList);
