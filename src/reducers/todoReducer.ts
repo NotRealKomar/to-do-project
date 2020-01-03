@@ -19,12 +19,6 @@ export default function(state = initialState, action: IAction) {
                 items: action.payload,
             }
         }
-        case types.CLEAR_ITEMS: {
-            return {
-                ...state,
-                items: action.payload,
-            }
-        }
         case types.GET_ITEMS: {
             return {
                 ...state,
