@@ -9,21 +9,13 @@ export function getItems() : ToDo[] {
 export function addItem(item: ToDo) : ToDo[] {
     const items = getItems();
     items.push(item);
-    console.log("added " + item.id);
-
     sessionStorage.setItem("todos", JSON.stringify(items));
 
     return items;
 }
 
 export function removeItem(id: string) : ToDo[] {
-    const items = getItems();
-    const itemToRemove = items.find(todo => todo.id === id);
-    const itemToRemoveIndex = items.lastIndexOf(itemToRemove!);
-
-    items.splice(itemToRemoveIndex, 1);
-    console.log("removed " + itemToRemove?.id);
-
+    const items = getItems().filter(item => item.id !== id);
     sessionStorage.setItem("todos", JSON.stringify(items));
 
     return items;
