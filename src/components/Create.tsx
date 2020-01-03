@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import ToDo from "../models/ToDo";
 import "../styles/create.scss";
 import { Guid } from "guid-typescript";
+import { ToDoState } from "../reducers/todoReducer";
+import { addItem } from "../actions/todoActions";
+import { connect } from "react-redux";
 
 function Create(props: any){
     const handleOnSubmit = (event: any) => {
         event.preventDefault();
         if(title && description){
             const item = new ToDo(Guid.create().toString(), title, description);
-            props.onSubmit(item);
+            props.addItem(item);
         }
     }
 
@@ -35,4 +38,10 @@ function Create(props: any){
     )
 }
 
-export default Create;
+const mapStateToProps = (state: ToDoState) => {
+    return {
+        items: state.items,
+    }
+}
+
+export default connect(mapStateToProps, { addItem })(Create);
