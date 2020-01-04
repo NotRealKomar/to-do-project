@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ToDo from "../models/ToDo";
 import "../styles/create.scss";
 import { Guid } from "guid-typescript";
 import { addItem } from "../actions/todoActions";
@@ -9,7 +8,13 @@ function Create(props: any){
     const handleOnSubmit = (event: any) => {
         event.preventDefault();
         if(title && description){
-            const item = new ToDo(Guid.create().toString(), title, description);
+            const item = ({
+                id: Guid.create().toString(), 
+                title: title, 
+                content: description, 
+                datePublished: new Date(),
+            });
+
             props.addItem(item);
         }
     }
