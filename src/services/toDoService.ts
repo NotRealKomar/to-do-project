@@ -20,7 +20,3 @@ export function removeItem(id: string) : ToDo[] {
 
     return items;
 }
-
-export function clearItems() {
-    sessionStorage.removeItem("todos");
-}

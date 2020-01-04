@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ToDo from "../models/ToDo";
 import "../styles/create.scss";
 import { Guid } from "guid-typescript";
-import { ToDoState } from "../reducers/todoReducer";
 import { addItem } from "../actions/todoActions";
 import { connect } from "react-redux";
 
@@ -38,10 +37,4 @@ function Create(props: any){
     )
 }
 
-const mapStateToProps = (state: ToDoState) => {
-    return {
-        items: state.items,
-    }
-}
-
-export default connect(mapStateToProps, { addItem })(Create);
+export default connect(null, { addItem })(Create);

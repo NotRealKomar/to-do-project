@@ -31,11 +31,3 @@ export const getItems = () => (dispatch: Dispatch<IAction>) => {
         payload: items,
     });
 }
-
-export const clearItems = () => (dispatch: Dispatch<IAction>) => {
-    toDoService.clearItems();
-    dispatch({
-        type: types.CLEAR_ITEMS,
-        payload: []
-    });
-}
