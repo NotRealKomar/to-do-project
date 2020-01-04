@@ -1,14 +1,12 @@
 import * as types from "../actions/types";
-import ToDo from "../models/ToDo";
 import { IAction } from "../actions/todoActions";
 
 export interface ToDoState {
     toDo?: any,
-    items: ToDo[],
 }
 
-const initialState: ToDoState = {
-    items: []
+const initialState = {
+    toDo: {}
 }
 
 export default function(state = initialState, action: IAction) {
