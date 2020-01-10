@@ -16,8 +16,8 @@ export const addItem = (item: ToDo) => (dispatch: Dispatch<IAction>) => {
     });
 }
 
-export const removeItem = (id: string) => (dispatch: Dispatch<IAction>) => {
-    const items = toDoService.removeItem(id);
+export const removeItem = (item: ToDo) => (dispatch: Dispatch<IAction>) => {
+    const items = toDoService.removeItem(item);
     dispatch({
         type: types.REMOVE_ITEMS,
         payload: items,
