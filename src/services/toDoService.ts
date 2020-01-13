@@ -14,8 +14,8 @@ export function addItem(item: ToDo) : ToDo[] {
     return items;
 }
 
-export function removeItem(id: string) : ToDo[] {
-    const items = getItems().filter(item => item.id !== id);
+export function removeItem(itemToRemove: ToDo) : ToDo[] {
+    const items = getItems().filter(item => item.id !== itemToRemove.id);
     sessionStorage.setItem("todos", JSON.stringify(items));
 
     return items;

@@ -16,7 +16,7 @@ function ToDoItem(props: IProps){
           {props.item.title}
         </h4>
         <div className="item__logo_close">
-          <i className="fas fa-times" onClick={() => props.onClick(props.item.id)}></i>
+          <i className="fas fa-times" onClick={() => props.onClick(props.item)}></i>
         </div>
       </div>
       <div className="item__content">

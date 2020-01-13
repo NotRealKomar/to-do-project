@@ -19,8 +19,8 @@ class ToDoList extends React.Component<IProps> {
     this.props.getItems();
   }
 
-  handleOnRemove = (id: string) => {
-    this.props.removeItem(id);
+  handleOnRemove = (item: ToDo) => {
+    this.props.removeItem(item);
   }
 
   render() {
