@@ -5,18 +5,22 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { logger } from "./middlewares/logger";
 import { crashReporter } from "./middlewares/crashReporter";
 import { actionCounter } from "./middlewares/actionCounter";
+import { verifyAuth } from "./actions/loginActions";
 
 const initialState = {};
 
 const middleware = [thunk];
 
-const store = createStore(
-    rootReducer, 
-    initialState,
-    composeWithDevTools(
-        applyMiddleware(...middleware),
-        applyMiddleware(logger, crashReporter, actionCounter),
-    ),
-);
+export default function configureStore(persistedState = initialState) {
+    const store = createStore(
+        rootReducer,
+        initialState,
+        composeWithDevTools(
+            applyMiddleware(...middleware),
+            applyMiddleware(logger, crashReporter, actionCounter),
+        )
+    );
+    store.dispatch(verifyAuth() as any);
 
-export default store;
+    return store;
+}

@@ -2,7 +2,7 @@ import * as types from "../actions/types";
 import { IAction } from "../actions/todoActions";
 
 export interface ToDoState {
-    toDo?: any,
+    toDo?: any;
 }
 
 const initialState = {
