@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "../styles/create.scss";
+import "../../styles/create.scss";
 import { Guid } from "guid-typescript";
-import { addItem } from "../actions/todoActions";
+import { addItem } from "../../actions/todoActions";
 import { connect } from "react-redux";
 
 function Create(props: any){
