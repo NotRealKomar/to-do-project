@@ -2,8 +2,9 @@ import * as types from "../actions/types";
 import * as toDoService from "../services/toDoService";
 import ToDo from "../models/ToDo";
 import { Dispatch } from "react";
+import { Action } from "redux";
 
-export interface IAction {
+export interface IAction extends Action {
     type: string,
     payload: ToDo[],
 }

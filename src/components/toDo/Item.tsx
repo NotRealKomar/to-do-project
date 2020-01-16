@@ -1,8 +1,8 @@
 import React from "react";
 import moment from "moment";
-import ToDo from "../models/ToDo";
-import "../styles/item.scss"
-import "../styles/fontawesome/fontawesome.scss";
+import ToDo from "../../models/ToDo";
+import "../../styles/item.scss"
+import "../../styles/fontawesome/fontawesome.scss";
 
 interface IProps{
   item: ToDo;

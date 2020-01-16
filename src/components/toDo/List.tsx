@@ -1,12 +1,12 @@
 import React from "react";
-import "../styles/list.scss";
+import "../../styles/list.scss";
 import Item from "./Item";
 import Header from "./Header";
-import ToDo from "../models/ToDo";
+import ToDo from "../../models/ToDo";
 import Create from "./Create";
 import { connect } from "react-redux";
-import { ToDoState } from "../reducers/todoReducer";
-import { getItems, removeItem } from "../actions/todoActions";
+import { ToDoState } from "../../reducers/todoReducer";
+import { getItems, removeItem } from "../../actions/todoActions";
 
 interface IProps {
   getItems: Function,
