@@ -12,7 +12,7 @@ const firebaseConfig = {
     appId: "1:459079348233:web:09620da831b56af08488d8",
 };
 
-export const myFirebase = firebase.initializeApp(firebaseConfig);
+export const firebaseService = firebase.initializeApp(firebaseConfig);
 const databaseRef = firebase.database().ref();
 
 export const toDosRef = databaseRef.child("toDos");
