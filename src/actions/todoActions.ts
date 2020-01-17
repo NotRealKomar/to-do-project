@@ -23,9 +23,10 @@ const receiveAddItem = (items: ToDo[]) => {
     };
 }
 
-const addItemError = () => {
+const addItemError = (errorMessage: string) => {
     return {
         type: types.ADD_ITEM_FAILURE,
+        errorMessage: errorMessage,
     };
 }
 
@@ -42,9 +43,10 @@ const receiveGetItems = (items: ToDo[]) => {
     };
 }
 
-const getItemsError = () => {
+const getItemsError = (errorMessage: string) => {
     return {
         type: types.GET_ITEMS_FAILURE,
+        errorMessage: errorMessage,
     };
 }
 
@@ -61,9 +63,10 @@ const receiveRemoveItem = (items: ToDo[]) => {
     };
 }
 
-const removeItemError = () => {
+const removeItemError = (errorMessage: string) => {
     return {
         type: types.REMOVE_ITEMS_FAILURE,
+        errorMessage: errorMessage,
     };
 }
 
@@ -73,8 +76,8 @@ export const addItem = (item: ToDo) => async (dispatch: Dispatch<IAction>) => {
         const items = await toDoService.addItem(item);
         dispatch(receiveAddItem(items));
     }
-    catch (error){
-        dispatch(addItemError());
+    catch (error) {
+        dispatch(addItemError((error as Error).message));
     }
 }
 
@@ -84,8 +87,8 @@ export const removeItem = (item: ToDo) => async (dispatch: Dispatch<IAction>) =>
         const items = await toDoService.removeItem(item);
         dispatch(receiveRemoveItem(items));
     }
-    catch {
-        dispatch(removeItemError());
+    catch (error) {
+        dispatch(removeItemError((error as Error).message));
     }
 }
 
@@ -95,7 +98,7 @@ export const getItems = () => async (dispatch: Dispatch<IAction>) => {
         const items = await toDoService.getItems();
         dispatch(receiveGetItems(items));
     }
-    catch {
-        dispatch(getItemsError());
+    catch (error) {
+        dispatch(getItemsError((error as Error).message));
     }
 }
