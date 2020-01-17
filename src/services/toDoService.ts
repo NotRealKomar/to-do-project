@@ -1,5 +1,5 @@
 import ToDo from "../models/ToDo";
-import { toDosRef } from "../firebase";
+import { toDosRef } from "./firebaseService";
 
 export async function getItems() : Promise<ToDo[]> {
     const itemsJson: ToDo[] = [];

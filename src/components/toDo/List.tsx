@@ -11,7 +11,8 @@ import { getItems, removeItem } from "../../actions/todoActions";
 interface IProps {
   getItems: Function,
   removeItem: Function,
-  items: ToDo[]
+  items: ToDo[],
+  isLoading: false,
 }
 
 class ToDoList extends React.Component<IProps> {
@@ -37,7 +38,7 @@ class ToDoList extends React.Component<IProps> {
           <div className="list__info">
             <ul>
               <h3>To-Do's</h3>
-              <hr/>
+              <hr />
               <li>
                 {(this.props.items) ? (this.props.items.length) : (<span>No</span>)} to-do's
                 [<i className="fas fa-thumbs-up"></i>]
@@ -46,6 +47,8 @@ class ToDoList extends React.Component<IProps> {
                 {new Date().toDateString()}
                 [<i className="fas fa-clock"></i>]
               </li>
+              <hr />
+              {this.props.isLoading && (<li>Loading...</li>)}
             </ul>
           </div>
         </div>
@@ -57,6 +60,7 @@ class ToDoList extends React.Component<IProps> {
 const mapStateToProps = (state: ToDoState) => {
   return {
     items: state.toDo.items,
+    isLoading: state.toDo.isLoading,
   }
 }
 

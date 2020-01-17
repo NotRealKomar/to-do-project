@@ -1,7 +1,17 @@
-export const ADD_ITEM = "ADD_ITEM";
-export const REMOVE_ITEMS = "REMOVE_ITEM";
-export const GET_ITEMS = "GET_ITEMS";
+// toDo actions
+export const ADD_ITEM_REQUEST = "ADD_ITEM_REQUEST";
+export const ADD_ITEM_SUCCESS = "ADD_ITEM_SUCCESS";
+export const ADD_ITEM_FAILURE = "ADD_ITEM_FAILURE";
 
+export const REMOVE_ITEMS_REQUEST = "REMOVE_ITEMS_REQUEST";
+export const REMOVE_ITEMS_SUCCESS = "REMOVE_ITEMS_SUCCESS";
+export const REMOVE_ITEMS_FAILURE = "REMOVE_ITEMS_FAILURE";
+
+export const GET_ITEMS_REQUEST = "GET_ITEMS_REQUEST";
+export const GET_ITEMS_SUCCESS = "GET_ITEMS_SUCCESS";
+export const GET_ITEMS_FAILURE = "GET_ITEMS_FAILURE";
+
+// login actions
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
