@@ -2,16 +2,16 @@ import ToDo from "../models/ToDo";
 import { toDosRef } from "./firebaseService";
 
 export async function getItems() : Promise<ToDo[]> {
-    const itemsJson: ToDo[] = [];
+    const items: ToDo[] = [];
     await toDosRef.once('value', snapshot => {
         snapshot.forEach((child) => {
             const item = child.val() as ToDo;
             item.id = child.key ?? item.id;
-            itemsJson.push(item);
+            items.push(item);
         });
     });
 
-    return itemsJson;
+    return items;
 }
 
 export async function addItem(item: ToDo) : Promise<ToDo[]> {

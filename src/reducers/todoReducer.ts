@@ -3,14 +3,14 @@ import { IAction } from "../actions/todoActions";
 
 export interface ToDoState {
     toDo?: any;
-    isLoading?: false;
-    addError: false;
-    removeError: false;
-    getError: false;
+    isLoading?: boolean;
+    addError?: boolean;
+    removeError?: boolean;
+    getError?: boolean;
 }
 
 const initialState = {
-    toDo: {}
+    isLoading: false,
 }
 
 export default function(state = initialState, action: IAction) {
