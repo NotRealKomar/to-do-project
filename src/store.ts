@@ -14,7 +14,7 @@ const middleware = [thunk];
 export default function configureStore(persistedState = initialState) {
     const store = createStore(
         rootReducer,
-        initialState,
+        persistedState,
         composeWithDevTools(
             applyMiddleware(...middleware),
             applyMiddleware(logger, crashReporter, actionCounter),
