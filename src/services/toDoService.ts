@@ -13,6 +13,7 @@ export const getItems: () => Promise<ToDo[]> = async () => {
         });
     } catch (error) {
         console.error(error);
+        throw error;
     }
     
     return items;
@@ -25,7 +26,8 @@ export const addItem: (item: ToDo) => Promise<ToDo[]> = async (item) => {
         item.id = snapshot.key ?? item.id;
         items.push(item);
     } catch (error) {
-        console.error(error)
+        console.error(error);
+        throw error;
     }
 
     return items;
@@ -37,7 +39,8 @@ export const removeItem: (itemToRemove: ToDo) => Promise<ToDo[]> = async (itemTo
         items = items.filter(item => item.id !== itemToRemove.id);
         await toDosRef.child(itemToRemove.id).remove();
     } catch (error) {
-        console.error(error)
+        console.error(error);
+        throw error;
     }
 
     return items;

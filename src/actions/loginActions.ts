@@ -57,7 +57,7 @@ const verifySuccess = () => {
   };
 };
 
-export const loginUser = async (email: string, password: string) => async (dispatch: Dispatch<IAction>) => {
+export const loginUser = (email: string, password: string) => async (dispatch: Dispatch<IAction>) => {
   dispatch(requestLogin());
   try {
     const credentials = await firebaseService.auth().signInWithEmailAndPassword(email, password);
@@ -68,7 +68,7 @@ export const loginUser = async (email: string, password: string) => async (dispa
   }
 }
 
-export const logoutUser = async () => async (dispatch: Dispatch<IAction>) => {
+export const logoutUser = () => async (dispatch: Dispatch<IAction>) => {
   dispatch(requestLogout());
   try {
     await firebaseService.auth().signOut();
@@ -78,7 +78,7 @@ export const logoutUser = async () => async (dispatch: Dispatch<IAction>) => {
   }
 }
 
-export const verifyAuth = () => (dispatch: Dispatch<IAction>) => {
+export const verifyAuth = () => async (dispatch: Dispatch<IAction>) => {
   dispatch(verifyRequest());
   firebaseService
     .auth()

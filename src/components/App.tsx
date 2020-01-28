@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import { LoginState } from '../reducers/loginReducer'
 import { Switch, Route } from 'react-router';
+import { verifyAuth } from '../actions/loginActions';
 
 import ProtectedRoute from './login/ProtectedRoute';
 import Home from './Home';
@@ -10,10 +11,15 @@ import Login from './login/Login';
 interface IProps {
   isAuthenticated: boolean;
   isVerifying: boolean;
+  verifyAuth: () => void;
 }
 
 const App: React.FC<IProps> = (props) => {
-    const { isAuthenticated, isVerifying } = props;
+    const { isAuthenticated, isVerifying, verifyAuth } = props;
+    useEffect(() => {
+      verifyAuth();
+    }, [ verifyAuth ]);
+
     return (
       <Switch>
         <ProtectedRoute
@@ -34,4 +40,4 @@ const mapStateToProps = (state: LoginState) => (
   }
 )
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { verifyAuth })(App);
