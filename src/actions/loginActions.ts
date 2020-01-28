@@ -57,42 +57,35 @@ const verifySuccess = () => {
   };
 };
 
-export const loginUser = (email: string, password: string) => (dispatch: Dispatch<IAction>) => {
-    dispatch(requestLogin());
-    firebaseService
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(credentials => {
-          if(credentials.user !== null) { 
-            dispatch(receiveLogin(credentials.user));
-          }
-        })
-        .catch(error => {
-            dispatch(loginError());
-        });
+export const loginUser = async (email: string, password: string) => async (dispatch: Dispatch<IAction>) => {
+  dispatch(requestLogin());
+  try {
+    const credentials = await firebaseService.auth().signInWithEmailAndPassword(email, password);
+    const { user } = credentials;
+    user && dispatch(receiveLogin(user));
+  } catch (error) {
+    dispatch(loginError());
+  }
 }
 
-export const logoutUser = () => (dispatch: Dispatch<IAction>) => {
-    dispatch(requestLogout());
-    firebaseService
-        .auth()
-        .signOut()
-        .then(() => {
-            dispatch(receiveLogout());
-        })
-        .catch(() => {
-            dispatch(logoutError());
-        });
+export const logoutUser = async () => async (dispatch: Dispatch<IAction>) => {
+  dispatch(requestLogout());
+  try {
+    await firebaseService.auth().signOut();
+    dispatch(receiveLogout());
+  } catch (error) {
+    dispatch(logoutError());
+  }
 }
 
 export const verifyAuth = () => (dispatch: Dispatch<IAction>) => {
-    dispatch(verifyRequest());
-    firebaseService
-        .auth()
-        .onAuthStateChanged(user => {
-            if (user !== null) {
-                dispatch(receiveLogin(user));
-            }
-            dispatch(verifySuccess());
-        });
+  dispatch(verifyRequest());
+  firebaseService
+    .auth()
+    .onAuthStateChanged(user => {
+      if (user !== null) {
+        dispatch(receiveLogin(user));
+      }
+      dispatch(verifySuccess());
+    });
 }
