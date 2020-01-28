@@ -41,13 +41,12 @@ const Login: React.FC<IProps> = (props) => {
     }
 }
 
-const mapStateToProps = (state: LoginState) => {
-    return {
+const mapStateToProps = (state: LoginState) => (
+    {
         isLoggingIn: state.login.isLoggingIn,
         loginError: state.login.loginError,
         isAuthenticated: state.login.isAuthenticated
-    };
-}
-  
+    }
+);
+
 export default connect(mapStateToProps, { loginUser })(Login);
-  

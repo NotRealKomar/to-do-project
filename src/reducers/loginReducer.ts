@@ -1,4 +1,4 @@
-import * as types from "../actions/types";
+import types from "../actions/types";
 import { IAction } from "../actions/loginActions";
 
 interface ILogin {

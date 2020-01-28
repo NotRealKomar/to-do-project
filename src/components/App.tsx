@@ -27,10 +27,11 @@ const App: React.FC<IProps> = (props) => {
       </Switch>
     );
   }
-const mapStateToProps = (state: LoginState) => {
-    return {
-        isAuthenticated: state.login.isAuthenticated,
-        isVerifying: state.login.isVerifying
-    };
-}
+const mapStateToProps = (state: LoginState) => (
+  {
+    isAuthenticated: state.login.isAuthenticated,
+    isVerifying: state.login.isVerifying
+  }
+)
+
 export default connect(mapStateToProps)(App);

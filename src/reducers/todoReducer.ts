@@ -1,4 +1,4 @@
-import * as types from "../actions/types";
+import types from "../actions/types";
 import { IAction } from "../actions/todoActions";
 import ToDo from "../models/ToDo";
 

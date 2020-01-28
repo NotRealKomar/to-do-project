@@ -28,10 +28,11 @@ class Home extends Component<IProps> {
     );
   }
 }
-const mapStateToProps = (state: LoginState) => {
-  return {
+const mapStateToProps = (state: LoginState) => (
+  {
     isLoggingOut: state.login.isLoggingOut,
     logoutError: state.login.logoutError
-  };
-}
+  }
+)
+
 export default connect(mapStateToProps, { logoutUser })(Home);

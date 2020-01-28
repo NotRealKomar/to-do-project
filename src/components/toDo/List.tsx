@@ -3,7 +3,7 @@ import "../../styles/list.scss";
 import Item from "./Item";
 import Header from "./Header";
 import ToDo from "../../models/ToDo";
-import Create from "./Create";
+import CreateToDo from "./Create";
 import { connect } from "react-redux";
 import { ToDoState } from "../../reducers/todoReducer";
 import { getItems, removeItem } from "../../actions/todoActions";
@@ -28,7 +28,7 @@ class ToDoList extends React.Component<IProps> {
     return (
       <>
         <Header />
-        <Create />
+        <CreateToDo />
         <div className="list">
           <div className="list__main">
             {this.props.items && this.props.items.map(item => 
@@ -57,11 +57,11 @@ class ToDoList extends React.Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: ToDoState) => {
-  return {
+const mapStateToProps = (state: ToDoState) => (
+  {
     items: state.toDo.items,
     isLoading: state.toDo.isLoading,
   }
-}
+)
 
 export default connect( mapStateToProps, { getItems, removeItem })(ToDoList);

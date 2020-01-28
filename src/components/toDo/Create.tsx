@@ -9,7 +9,7 @@ interface IProps{
     addItem: (item: ToDo) => void;
 }
 
-const Create: React.FC<IProps> = (props) => {
+const CreateToDo: React.FC<IProps> = (props) => {
     const handleOnSubmit: (event: FormEvent) => void = (event) => {
         event.preventDefault();
         if(title && description){
@@ -47,4 +47,4 @@ const Create: React.FC<IProps> = (props) => {
     )
 }
 
-export default connect(null, { addItem })(Create);
+export default connect(null, { addItem })(CreateToDo);
