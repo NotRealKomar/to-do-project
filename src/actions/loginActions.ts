@@ -83,9 +83,7 @@ export const verifyAuth = () => (dispatch: Dispatch<IAction>) => {
   firebaseService
     .auth()
     .onAuthStateChanged(user => {
-      if (user !== null) {
-        dispatch(receiveLogin(user));
-      }
+      user && dispatch(receiveLogin(user));
       dispatch(verifySuccess());
     });
 }
