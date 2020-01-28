@@ -1,4 +1,4 @@
-import * as types from "../actions/types";
+import types from "../actions/types";
 import * as toDoService from "../services/toDoService";
 import ToDo from "../models/ToDo";
 import { Dispatch } from "react";

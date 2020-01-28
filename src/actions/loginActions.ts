@@ -1,4 +1,4 @@
-import * as types from "./types";
+import types from "./types";
 import { Dispatch } from "react";
 import { firebaseService } from "../services/firebaseService";
 import { Action } from "redux";
