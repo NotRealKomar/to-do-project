@@ -11,22 +11,22 @@ interface IProps {
   logoutError: boolean;
 }
 
-class Home extends Component<IProps> {
-  handleLogout = () => {
-    this.props.logoutUser();
+const Home: React.FC<IProps> = (props) => {
+  const { isLoggingOut, logoutError, logoutUser } = props;
+
+  const handleLogout = () => {
+    logoutUser();
   };
-  render() {
-    const { isLoggingOut, logoutError } = this.props;
-    return (
-      <div>
-        <List />
-        
-        <button onClick={this.handleLogout}>Logout</button>
-        {isLoggingOut && <p>Logging Out....</p>}
-        {logoutError && <p>Error logging out</p>}
-      </div>
-    );
-  }
+
+  return (
+    <div>
+      <List />
+      
+      <button onClick={handleLogout}>Logout</button>
+      {isLoggingOut && <p>Logging Out....</p>}
+      {logoutError && <p>Error logging out</p>}
+    </div>
+  );
 }
 const mapStateToProps = (state: LoginState) => (
   {

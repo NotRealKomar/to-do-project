@@ -30,15 +30,14 @@ const Login: React.FC<IProps> = (props) => {
 
     if (isAuthenticated) {
         return <Redirect to="/" />;
-    } else {
-        return (
-            <form onSubmit={handleOnSubmit}>
-                <input placeholder="Email" onChange={handleOnEmailChange}></input>
-                <input placeholder="Password" onChange={handleOnPasswordChange}></input>
-                <button type="submit">submit</button>
-            </form>
-        )
-    }
+    } 
+    return (
+        <form onSubmit={handleOnSubmit}>
+            <input placeholder="Email" onChange={handleOnEmailChange}></input>
+            <input placeholder="Password" onChange={handleOnPasswordChange}></input>
+            <button type="submit">submit</button>
+        </form>
+    )
 }
 
 const mapStateToProps = (state: LoginState) => (
