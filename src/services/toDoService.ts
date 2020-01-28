@@ -1,7 +1,7 @@
 import ToDo from "../models/ToDo";
 import { toDosRef } from "./firebaseService";
 
-export async function getItems() : Promise<ToDo[]> {
+export const getItems = async () => {
     const items: ToDo[] = [];
     await toDosRef.once('value', snapshot => {
         snapshot.forEach((child) => {
@@ -14,7 +14,7 @@ export async function getItems() : Promise<ToDo[]> {
     return items;
 }
 
-export async function addItem(item: ToDo) : Promise<ToDo[]> {
+export const addItem = async (item: ToDo) => {
     const items = await getItems();
     await toDosRef.push(item).then(snapshot => {
         item.id = snapshot.key ?? item.id;
@@ -24,7 +24,7 @@ export async function addItem(item: ToDo) : Promise<ToDo[]> {
     return items;
 }
 
-export async function removeItem(itemToRemove: ToDo) : Promise<ToDo[]> {
+export const removeItem = async (itemToRemove: ToDo) => {
     let items = await getItems();
     items = items.filter(item => item.id !== itemToRemove.id);
     await toDosRef.child(itemToRemove.id).remove();

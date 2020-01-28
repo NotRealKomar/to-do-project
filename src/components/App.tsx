@@ -7,7 +7,12 @@ import ProtectedRoute from './login/ProtectedRoute';
 import Home from './Home';
 import Login from './login/Login';
 
-function App(props: any) {
+interface IProps {
+  isAuthenticated: boolean;
+  isVerifying: boolean;
+}
+
+const App: React.FC<IProps> = (props) => {
     const { isAuthenticated, isVerifying } = props;
     return (
       <Switch>
@@ -22,7 +27,7 @@ function App(props: any) {
       </Switch>
     );
   }
-function mapStateToProps(state: LoginState) {
+const mapStateToProps = (state: LoginState) => {
     return {
         isAuthenticated: state.login.isAuthenticated,
         isVerifying: state.login.isVerifying

@@ -2,7 +2,7 @@ import React from "react";
 import "../../styles/header.scss";
 import "../../styles/fontawesome/fontawesome.scss";
 
-function Header(){
+const Header: React.FC = () => {
     return(
         <header className="header header_light">
             <h4 className="header__content">

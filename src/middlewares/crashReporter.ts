@@ -1,6 +1,6 @@
 import { IAction } from "../actions/todoActions";
 
-export const crashReporter = (store: any) => (next: Function) => (action: IAction) => {
+export const crashReporter = (store: {}) => (next: Function) => (action: IAction) => {
     try {
         return next(action);
     } catch (error) {

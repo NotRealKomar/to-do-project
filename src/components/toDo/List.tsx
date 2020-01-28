@@ -9,10 +9,10 @@ import { ToDoState } from "../../reducers/todoReducer";
 import { getItems, removeItem } from "../../actions/todoActions";
 
 interface IProps {
-  getItems: Function,
-  removeItem: Function,
+  getItems: () => Promise<void>,
+  removeItem: (item: ToDo) => Promise<void>,
   items: ToDo[],
-  isLoading: false,
+  isLoading: boolean,
 }
 
 class ToDoList extends React.Component<IProps> {

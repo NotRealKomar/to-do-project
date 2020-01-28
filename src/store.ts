@@ -11,7 +11,7 @@ const initialState = {};
 
 const middleware = [thunk];
 
-export default function configureStore(persistedState = initialState) {
+export const configureStore = (persistedState = initialState) => {
     const store = createStore(
         rootReducer,
         persistedState,

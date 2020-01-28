@@ -1,19 +1,21 @@
 import * as types from "../actions/types";
 import { IAction } from "../actions/todoActions";
+import ToDo from "../models/ToDo";
+
+interface IToDo {
+    items: ToDo[];
+    isLoading: boolean;
+}
 
 export interface ToDoState {
-    toDo?: any;
-    isLoading?: boolean;
-    addError?: boolean;
-    removeError?: boolean;
-    getError?: boolean;
+    toDo: IToDo;
 }
 
 const initialState = {
     isLoading: false,
 }
 
-export default function(state = initialState, action: IAction) {
+export default (state = initialState, action: IAction) => {
     switch (action.type) {
         case types.ADD_ITEM_REQUEST: {
             return {

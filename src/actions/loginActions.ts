@@ -5,7 +5,7 @@ import { Action } from "redux";
 
 export interface IAction extends Action {
     type: string;
-    user?: any;
+    user?: firebase.User;
 }
 
 const requestLogin = () => {
@@ -14,7 +14,7 @@ const requestLogin = () => {
   };
 };
 
-const receiveLogin = (user: any) => {
+const receiveLogin = (user: firebase.User) => {
   return {
     type: types.LOGIN_SUCCESS,
     user
@@ -62,8 +62,10 @@ export const loginUser = (email: string, password: string) => (dispatch: Dispatc
     firebaseService
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(user => {
-            dispatch(receiveLogin(user));
+        .then(credentials => {
+          if(credentials.user !== null) { 
+            dispatch(receiveLogin(credentials.user));
+          }
         })
         .catch(error => {
             dispatch(loginError());
@@ -88,7 +90,7 @@ export const verifyAuth = () => (dispatch: Dispatch<IAction>) => {
     firebaseService
         .auth()
         .onAuthStateChanged(user => {
-            if (user != null) {
+            if (user !== null) {
                 dispatch(receiveLogin(user));
             }
             dispatch(verifySuccess());

@@ -4,16 +4,22 @@ import { logoutUser } from "../actions/loginActions";
 import { LoginState } from "../reducers/loginReducer";
 
 import List from "./toDo/List";
-class Home extends Component<any> {
+
+interface IProps {
+  logoutUser: () => void;
+  isLoggingOut: boolean;
+  logoutError: boolean;
+}
+
+class Home extends Component<IProps> {
   handleLogout = () => {
-    const { dispatch } = this.props;
-    dispatch(logoutUser());
+    this.props.logoutUser();
   };
   render() {
     const { isLoggingOut, logoutError } = this.props;
     return (
       <div>
-        <List></List>
+        <List />
         
         <button onClick={this.handleLogout}>Logout</button>
         {isLoggingOut && <p>Logging Out....</p>}
@@ -22,10 +28,10 @@ class Home extends Component<any> {
     );
   }
 }
-function mapStateToProps(state: LoginState) {
+const mapStateToProps = (state: LoginState) => {
   return {
     isLoggingOut: state.login.isLoggingOut,
     logoutError: state.login.logoutError
   };
 }
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, { logoutUser })(Home);

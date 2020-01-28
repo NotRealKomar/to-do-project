@@ -6,9 +6,9 @@ import "../../styles/fontawesome/fontawesome.scss";
 
 interface IProps{
   item: ToDo;
-  onClick: any;
+  onClick: (item: ToDo) => void;
 }
-function ToDoItem(props: IProps){
+const ToDoItem: React.FC<IProps> = (props) => {
   return(
     <div className="item">
       <div className="item__header">
