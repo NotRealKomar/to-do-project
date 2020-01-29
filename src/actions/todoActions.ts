@@ -1,104 +1,104 @@
-import types from "../actions/types";
-import * as toDoService from "../services/toDoService";
-import ToDo from "../models/ToDo";
-import { Dispatch } from "react";
-import { Action } from "redux";
+import types from '../actions/types';
+import * as toDoService from '../services/toDoService';
+import ToDo from '../models/ToDo';
+import { Dispatch } from 'react';
+import { Action } from 'redux';
 
 export interface IAction extends Action {
-    type: string;
-    payload?: ToDo[];
-    errorMessage?: string;
+	type: string;
+	payload?: ToDo[];
+	errorMessage?: string;
 }
 
 const requestAddItem = () => {
-    return {
-        type: types.ADD_ITEM_REQUEST,
-    };
-}
+	return {
+		type: types.ADD_ITEM_REQUEST,
+	};
+};
 
 const receiveAddItem = (items: ToDo[]) => {
-    return {
-        type: types.ADD_ITEM_SUCCESS,
-        payload: items,
-    };
-}
+	return {
+		type: types.ADD_ITEM_SUCCESS,
+		payload: items,
+	};
+};
 
 const addItemError = (errorMessage: string) => {
-    return {
-        type: types.ADD_ITEM_FAILURE,
-        errorMessage: errorMessage,
-    };
-}
+	return {
+		type: types.ADD_ITEM_FAILURE,
+		errorMessage: errorMessage,
+	};
+};
 
 const requestGetItems = () => {
-    return {
-        type: types.GET_ITEMS_REQUEST,
-    };
-}
+	return {
+		type: types.GET_ITEMS_REQUEST,
+	};
+};
 
 const receiveGetItems = (items: ToDo[]) => {
-    return {
-        type: types.GET_ITEMS_SUCCESS,
-        payload: items,
-    };
-}
+	return {
+		type: types.GET_ITEMS_SUCCESS,
+		payload: items,
+	};
+};
 
 const getItemsError = (errorMessage: string) => {
-    return {
-        type: types.GET_ITEMS_FAILURE,
-        errorMessage: errorMessage,
-    };
-}
+	return {
+		type: types.GET_ITEMS_FAILURE,
+		errorMessage: errorMessage,
+	};
+};
 
 const requestRemoveItem = () => {
-    return {
-        type: types.REMOVE_ITEMS_REQUEST,
-    };
-}
+	return {
+		type: types.REMOVE_ITEMS_REQUEST,
+	};
+};
 
 const receiveRemoveItem = (items: ToDo[]) => {
-    return {
-        type: types.REMOVE_ITEMS_SUCCESS,
-        payload: items,
-    };
-}
+	return {
+		type: types.REMOVE_ITEMS_SUCCESS,
+		payload: items,
+	};
+};
 
 const removeItemError = (errorMessage: string) => {
-    return {
-        type: types.REMOVE_ITEMS_FAILURE,
-        errorMessage: errorMessage,
-    };
-}
+	return {
+		type: types.REMOVE_ITEMS_FAILURE,
+		errorMessage: errorMessage,
+	};
+};
 
 export const addItem = (item: ToDo) => async (dispatch: Dispatch<IAction>) => {
-    try {
-        dispatch(requestAddItem());
-        const items = await toDoService.addItem(item);
-        dispatch(receiveAddItem(items));
-    }
-    catch (error) {
-        dispatch(addItemError((error as Error).message));
-    }
-}
+	try {
+		dispatch(requestAddItem());
+		const items = await toDoService.addItem(item);
+		dispatch(receiveAddItem(items));
+	}
+	catch (error) {
+		dispatch(addItemError((error as Error).message));
+	}
+};
 
 export const removeItem = (item: ToDo) => async (dispatch: Dispatch<IAction>) => {
-    try {
-        dispatch(requestRemoveItem());
-        const items = await toDoService.removeItem(item);
-        dispatch(receiveRemoveItem(items));
-    }
-    catch (error) {
-        dispatch(removeItemError((error as Error).message));
-    }
-}
+	try {
+		dispatch(requestRemoveItem());
+		const items = await toDoService.removeItem(item);
+		dispatch(receiveRemoveItem(items));
+	}
+	catch (error) {
+		dispatch(removeItemError((error as Error).message));
+	}
+};
 
 export const getItems = () => async (dispatch: Dispatch<IAction>) => {
-    try {
-        dispatch(requestGetItems());
-        const items = await toDoService.getItems();
-        dispatch(receiveGetItems(items));
-    }
-    catch (error) {
-        dispatch(getItemsError((error as Error).message));
-    }
-}
+	try {
+		dispatch(requestGetItems());
+		const items = await toDoService.getItems();
+		dispatch(receiveGetItems(items));
+	}
+	catch (error) {
+		dispatch(getItemsError((error as Error).message));
+	}
+};
