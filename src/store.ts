@@ -4,23 +4,20 @@ import rootReducer from "./reducers";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { logger } from "./middlewares/logger";
 import { crashReporter } from "./middlewares/crashReporter";
-import { actionCounter } from "./middlewares/actionCounter";
-import { verifyAuth } from "./actions/loginActions";
 
 const initialState = {};
 
 const middleware = [thunk];
 
-export default function configureStore(persistedState = initialState) {
+export const configureStore = (persistedState = initialState) => {
     const store = createStore(
         rootReducer,
-        initialState,
+        persistedState,
         composeWithDevTools(
             applyMiddleware(...middleware),
-            applyMiddleware(logger, crashReporter, actionCounter),
+            applyMiddleware(logger, crashReporter),
         )
     );
-    store.dispatch(verifyAuth() as any);
 
     return store;
 }

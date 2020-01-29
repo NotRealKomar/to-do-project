@@ -6,26 +6,26 @@ import "../../styles/fontawesome/fontawesome.scss";
 
 interface IProps{
   item: ToDo;
-  onClick: any;
+  onClick: (item: ToDo) => void;
 }
-function ToDoItem(props: IProps){
-  return(
-    <div className="item">
-      <div className="item__header">
-        <h4 className="item__title"> 
-          {props.item.title}
-        </h4>
-        <div className="item__logo_close">
-          <i className="fas fa-times" onClick={() => props.onClick(props.item)}></i>
-        </div>
+const ToDoItem: React.FC<IProps> = (props) => 
+(
+  <div className="item">
+    <div className="item__header">
+      <h4 className="item__title"> 
+        {props.item.title}
+      </h4>
+      <div className="item__logo_close">
+        <i className="fas fa-times" onClick={() => props.onClick(props.item)}></i>
       </div>
-      <div className="item__content">
-        {props.item.content}
-      </div>
-      <small className="item__date-published">
-        {moment(props.item.datePublished).fromNow()}
-      </small>
     </div>
-  )
-}
+    <div className="item__content">
+      {props.item.content}
+    </div>
+    <small className="item__date-published">
+      {moment(props.item.datePublished).fromNow()}
+    </small>
+  </div>
+)
+
 export default ToDoItem;

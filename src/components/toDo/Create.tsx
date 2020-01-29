@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import "../../styles/create.scss";
 import { Guid } from "guid-typescript";
 import { addItem } from "../../actions/todoActions";
 import { connect } from "react-redux";
+import ToDo from "../../models/ToDo";
 
-function Create(props: any){
-    const handleOnSubmit = (event: any) => {
+interface IProps{
+    addItem: (item: ToDo) => void;
+}
+
+const CreateToDo: React.FC<IProps> = (props) => {
+    const handleOnSubmit: (event: FormEvent) => void = (event) => {
         event.preventDefault();
         if(title && description){
             const item = ({
@@ -19,12 +24,12 @@ function Create(props: any){
         }
     }
 
-    const handleOnTitleChange = (event: any) => {
-        setTitle(event.target.value);
+    const handleOnTitleChange: (event: FormEvent<HTMLInputElement>) => void = (event) => {
+        setTitle(event.currentTarget.value);
     }
 
-    const handleOnDescriptionChange = (event: any) => {
-        setDescription(event.target.value);
+    const handleOnDescriptionChange: (event: FormEvent<HTMLInputElement>) => void = (event) => {
+        setDescription(event.currentTarget.value);
     }
 
     const [title, setTitle] = useState("");
@@ -42,4 +47,4 @@ function Create(props: any){
     )
 }
 
-export default connect(null, { addItem })(Create);
+export default connect(null, { addItem })(CreateToDo);

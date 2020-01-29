@@ -3,15 +3,16 @@ import "../../styles/list.scss";
 import Item from "./Item";
 import Header from "./Header";
 import ToDo from "../../models/ToDo";
-import Create from "./Create";
+import CreateToDo from "./Create";
 import { connect } from "react-redux";
 import { ToDoState } from "../../reducers/todoReducer";
 import { getItems, removeItem } from "../../actions/todoActions";
 
 interface IProps {
-  getItems: Function,
-  removeItem: Function,
-  items: ToDo[]
+  getItems: () => Promise<void>,
+  removeItem: (item: ToDo) => Promise<void>,
+  items: ToDo[],
+  isLoading: boolean,
 }
 
 class ToDoList extends React.Component<IProps> {
@@ -27,7 +28,7 @@ class ToDoList extends React.Component<IProps> {
     return (
       <>
         <Header />
-        <Create />
+        <CreateToDo />
         <div className="list">
           <div className="list__main">
             {this.props.items && this.props.items.map(item => 
@@ -37,7 +38,7 @@ class ToDoList extends React.Component<IProps> {
           <div className="list__info">
             <ul>
               <h3>To-Do's</h3>
-              <hr/>
+              <hr />
               <li>
                 {(this.props.items) ? (this.props.items.length) : (<span>No</span>)} to-do's
                 [<i className="fas fa-thumbs-up"></i>]
@@ -46,6 +47,8 @@ class ToDoList extends React.Component<IProps> {
                 {new Date().toDateString()}
                 [<i className="fas fa-clock"></i>]
               </li>
+              <hr />
+              {this.props.isLoading && (<li>Loading...</li>)}
             </ul>
           </div>
         </div>
@@ -54,10 +57,11 @@ class ToDoList extends React.Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: ToDoState) => {
-  return {
+const mapStateToProps = (state: ToDoState) => (
+  {
     items: state.toDo.items,
+    isLoading: state.toDo.isLoading,
   }
-}
+)
 
 export default connect( mapStateToProps, { getItems, removeItem })(ToDoList);

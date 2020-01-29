@@ -1,31 +1,38 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/loginActions";
 import { LoginState } from "../reducers/loginReducer";
 
 import List from "./toDo/List";
-class Home extends Component<any> {
-  handleLogout = () => {
-    const { dispatch } = this.props;
-    dispatch(logoutUser());
-  };
-  render() {
-    const { isLoggingOut, logoutError } = this.props;
-    return (
-      <div>
-        <List></List>
-        
-        <button onClick={this.handleLogout}>Logout</button>
-        {isLoggingOut && <p>Logging Out....</p>}
-        {logoutError && <p>Error logging out</p>}
-      </div>
-    );
-  }
+
+interface IProps {
+  logoutUser: () => void;
+  isLoggingOut: boolean;
+  logoutError: boolean;
 }
-function mapStateToProps(state: LoginState) {
-  return {
+
+const Home: React.FC<IProps> = (props) => {
+  const { isLoggingOut, logoutError, logoutUser } = props;
+
+  const handleLogout = () => {
+    logoutUser();
+  };
+
+  return (
+    <div>
+      <List />
+      
+      <button onClick={handleLogout}>Logout</button>
+      {isLoggingOut && <p>Logging Out....</p>}
+      {logoutError && <p>Error logging out</p>}
+    </div>
+  );
+}
+const mapStateToProps = (state: LoginState) => (
+  {
     isLoggingOut: state.login.isLoggingOut,
     logoutError: state.login.logoutError
-  };
-}
-export default connect(mapStateToProps)(Home);
+  }
+)
+
+export default connect(mapStateToProps, { logoutUser })(Home);

@@ -1,33 +1,47 @@
 import ToDo from "../models/ToDo";
-import { toDosRef } from "../firebase";
+import { toDosRef } from "./firebaseService";
 
-export async function getItems() : Promise<ToDo[]> {
-    const itemsJson: ToDo[] = [];
-    await toDosRef.once('value', snapshot => {
-        snapshot.forEach((child) => {
-            const item = child.val() as ToDo;
-            item.id = child.key ?? item.id;
-            itemsJson.push(item);
+export const getItems: () => Promise<ToDo[]> = async () => {
+    const items: ToDo[] = [];
+    try {
+        await toDosRef.once('value', snapshot => {
+            snapshot.forEach((child) => {
+                const item = child.val() as ToDo;
+                item.id = child.key ?? item.id;
+                items.push(item);
+            });
         });
-    });
-
-    return itemsJson;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+    
+    return items;
 }
 
-export async function addItem(item: ToDo) : Promise<ToDo[]> {
+export const addItem: (item: ToDo) => Promise<ToDo[]> = async (item) => {
     const items = await getItems();
-    await toDosRef.push(item).then(snapshot => {
+    try {
+        const snapshot = await toDosRef.push(item);
         item.id = snapshot.key ?? item.id;
         items.push(item);
-    });
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 
     return items;
 }
 
-export async function removeItem(itemToRemove: ToDo) : Promise<ToDo[]> {
+export const removeItem: (itemToRemove: ToDo) => Promise<ToDo[]> = async (itemToRemove: ToDo) => {
     let items = await getItems();
-    items = items.filter(item => item.id !== itemToRemove.id);
-    await toDosRef.child(itemToRemove.id).remove();
+    try {
+        items = items.filter(item => item.id !== itemToRemove.id);
+        await toDosRef.child(itemToRemove.id).remove();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 
     return items;
 }
