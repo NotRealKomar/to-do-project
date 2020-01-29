@@ -2,19 +2,25 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { LoginState } from '../reducers/loginReducer';
 import { Switch, Route } from 'react-router';
-import { verifyAuth } from '../actions/loginActions';
+import * as ActionCreators from '../actions/loginActions';
 
 import ProtectedRoute from './login/ProtectedRoute';
 import Home from './Home';
 import Login from './login/Login';
+import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 
-interface IProps {
+interface IStateProps {
 	isAuthenticated: boolean;
 	isVerifying: boolean;
+}
+
+interface IDispatchProps {
 	verifyAuth: () => void;
 }
 
-const App: React.FC<IProps> = (props) => {
+type Props = IStateProps & IDispatchProps
+
+const App: React.FC<Props> = (props) => {
 	const { isAuthenticated, isVerifying, verifyAuth } = props;
 	useEffect(() => {
 		verifyAuth();
@@ -34,11 +40,15 @@ const App: React.FC<IProps> = (props) => {
 	);
 };
 
-const mapStateToProps = (state: LoginState) => (
+const mapStateToProps: (state: LoginState) => IStateProps = (state) => (
 	{
 		isAuthenticated: state.login.isAuthenticated,
 		isVerifying: state.login.isVerifying
 	}
 );
 
-export default connect(mapStateToProps, { verifyAuth })(App);
+const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<any>) => IDispatchProps = (dispatch, actions) => (
+	bindActionCreators(ActionCreators, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

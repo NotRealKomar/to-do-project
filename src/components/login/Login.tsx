@@ -1,15 +1,21 @@
 import React, { useState, FormEvent } from 'react';
-import { loginUser } from '../../actions/loginActions';
 import { connect } from 'react-redux';
 import { LoginState } from '../../reducers/loginReducer';
 import { Redirect } from 'react-router';
+import { Dispatch, bindActionCreators } from 'redux';
+import * as ActionCreators from '../../actions/loginActions';
 
-interface IProps {
-	loginUser: (email: string, password: string) => void;
+interface IStateProps {
 	isAuthenticated: boolean;
 }
 
-const Login: React.FC<IProps> = (props) => {
+interface IDispatchProps {
+	loginUser: (email: string, password: string) => void;
+}
+
+type Props = IStateProps & IDispatchProps
+
+const Login: React.FC<Props> = (props) => {
 	const { loginUser, isAuthenticated } = props; 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -40,7 +46,7 @@ const Login: React.FC<IProps> = (props) => {
 	);
 };
 
-const mapStateToProps = (state: LoginState) => (
+const mapStateToProps: (state: LoginState) => IStateProps = (state) => (
 	{
 		isLoggingIn: state.login.isLoggingIn,
 		loginError: state.login.loginError,
@@ -48,4 +54,8 @@ const mapStateToProps = (state: LoginState) => (
 	}
 );
 
-export default connect(mapStateToProps, { loginUser })(Login);
+const mapDispatchToProps: (dispatch: Dispatch, actions: Props) => IDispatchProps = (dispatch, actions) => (
+	bindActionCreators(ActionCreators, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

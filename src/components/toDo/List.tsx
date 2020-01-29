@@ -6,16 +6,22 @@ import ToDo from '../../models/ToDo';
 import CreateToDo from './Create';
 import { connect } from 'react-redux';
 import { ToDoState } from '../../reducers/todoReducer';
-import { getItems, removeItem } from '../../actions/todoActions';
+import * as ActionCreators from '../../actions/todoActions';
+import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 
-interface IProps {
-	getItems: () => Promise<void>,
-	removeItem: (item: ToDo) => Promise<void>,
-	items: ToDo[],
-	isLoading: boolean,
+interface IDispatchProps {
+	getItems: () => void;
+	removeItem: (item: ToDo) => void;
 }
 
-const ToDoList: React.FC<IProps> = (props) => {
+interface IStateProps {
+	items: ToDo[];
+	isLoading: boolean;
+}
+
+type Props = IStateProps & IDispatchProps
+
+const ToDoList: React.FC<Props> = (props) => {
 	const { getItems, removeItem, items, isLoading } = props;
 
 	useEffect(() => {
@@ -25,7 +31,7 @@ const ToDoList: React.FC<IProps> = (props) => {
 	const handleOnRemove: (item: ToDo) => void = (item) => {
 		removeItem(item);
 	};
-
+	
 	return (
 		<>
 			<Header />
@@ -57,11 +63,15 @@ const ToDoList: React.FC<IProps> = (props) => {
 	);
 };
 
-const mapStateToProps = (state: ToDoState) => (
+const mapStateToProps: (state: ToDoState) => IStateProps = (state) => (
 	{
 		items: state.toDo.items,
-		isLoading: state.toDo.isLoading,
+		isLoading: state.toDo.isLoading
 	}
 );
 
-export default connect( mapStateToProps, { getItems, removeItem })(ToDoList);
+const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<any>) => IDispatchProps = (dispatch, actions) => (
+	bindActionCreators(ActionCreators, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToDoList);

@@ -1,23 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions/loginActions';
+import * as ActionCreators from '../actions/loginActions';
 import { LoginState } from '../reducers/loginReducer';
+import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 
 import List from './toDo/List';
 
-interface IProps {
+interface IDispatchProps {
 	logoutUser: () => void;
+}
+
+interface IStateProps {
 	isLoggingOut: boolean;
 	logoutError: boolean;
 }
 
-const Home: React.FC<IProps> = (props) => {
+type Props = IDispatchProps & IStateProps
+
+const Home: React.FC<Props> = (props) => {
 	const { isLoggingOut, logoutError, logoutUser } = props;
 
 	const handleLogout = () => {
 		logoutUser();
 	};
-
+	
 	return (
 		<div>
 			<List />
@@ -29,11 +35,15 @@ const Home: React.FC<IProps> = (props) => {
 	);
 };
 
-const mapStateToProps = (state: LoginState) => (
+const mapStateToProps: (state: LoginState) => IStateProps = (state) => (
 	{
 		isLoggingOut: state.login.isLoggingOut,
 		logoutError: state.login.logoutError
 	}
 );
 
-export default connect(mapStateToProps, { logoutUser })(Home);
+const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<any>) => IDispatchProps = (dispatch, actions) => (
+	bindActionCreators(ActionCreators, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
