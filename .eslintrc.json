@@ -49,6 +49,14 @@
             "error",
             {"allowEmptyCatch": true}
         ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "spaced-comment": [
+            "error",
+            "always"
+        ],
         "no-unexpected-multiline": "error",
         "react/prop-types": "off",
         "no-unused-vars": "off"
