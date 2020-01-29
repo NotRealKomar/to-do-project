@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { LoginState } from '../reducers/loginReducer';
 import { Switch, Route } from 'react-router';
 import * as ActionCreators from '../actions/loginActions';
+import { IAction } from '../actions/loginActions';
+import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 
 import ProtectedRoute from './login/ProtectedRoute';
 import Home from './Home';
 import Login from './login/Login';
-import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 
 interface IStateProps {
 	isAuthenticated: boolean;
@@ -47,7 +48,7 @@ const mapStateToProps: (state: LoginState) => IStateProps = (state) => (
 	}
 );
 
-const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<any>) => IDispatchProps = (dispatch, actions) => (
+const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<IAction>) => IDispatchProps = (dispatch, actions) => (
 	bindActionCreators(ActionCreators, dispatch)
 );
 

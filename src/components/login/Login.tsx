@@ -2,8 +2,9 @@ import React, { useState, FormEvent } from 'react';
 import { connect } from 'react-redux';
 import { LoginState } from '../../reducers/loginReducer';
 import { Redirect } from 'react-router';
-import { Dispatch, bindActionCreators } from 'redux';
+import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 import * as ActionCreators from '../../actions/loginActions';
+import { IAction } from '../../actions/loginActions';
 
 interface IStateProps {
 	isAuthenticated: boolean;
@@ -54,7 +55,7 @@ const mapStateToProps: (state: LoginState) => IStateProps = (state) => (
 	}
 );
 
-const mapDispatchToProps: (dispatch: Dispatch, actions: Props) => IDispatchProps = (dispatch, actions) => (
+const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<IAction>) => IDispatchProps = (dispatch, actions) => (
 	bindActionCreators(ActionCreators, dispatch)
 );
 

@@ -7,6 +7,7 @@ import CreateToDo from './Create';
 import { connect } from 'react-redux';
 import { ToDoState } from '../../reducers/todoReducer';
 import * as ActionCreators from '../../actions/todoActions';
+import { IAction } from '../../actions/todoActions';
 import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 
 interface IDispatchProps {
@@ -70,7 +71,7 @@ const mapStateToProps: (state: ToDoState) => IStateProps = (state) => (
 	}
 );
 
-const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<any>) => IDispatchProps = (dispatch, actions) => (
+const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<IAction>) => IDispatchProps = (dispatch, actions) => (
 	bindActionCreators(ActionCreators, dispatch)
 );
 

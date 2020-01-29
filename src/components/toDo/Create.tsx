@@ -2,6 +2,7 @@ import React, { useState, FormEvent } from 'react';
 import '../../styles/create.scss';
 import { Guid } from 'guid-typescript';
 import * as ActionCreators from '../../actions/todoActions';
+import { IAction } from '../../actions/todoActions';
 import { connect } from 'react-redux';
 import ToDo from '../../models/ToDo';
 import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
@@ -49,7 +50,7 @@ const CreateToDo: React.FC<IProps> = (props) => {
 	);
 };
 
-const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<any>) => IProps = (dispatch, actions) => (
+const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<IAction>) => IProps = (dispatch, actions) => (
 	bindActionCreators(ActionCreators, dispatch)
 );
 

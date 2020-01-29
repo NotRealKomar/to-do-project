@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as ActionCreators from '../actions/loginActions';
+import { IAction } from '../actions/loginActions';
 import { LoginState } from '../reducers/loginReducer';
 import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 
@@ -42,7 +43,7 @@ const mapStateToProps: (state: LoginState) => IStateProps = (state) => (
 	}
 );
 
-const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<any>) => IDispatchProps = (dispatch, actions) => (
+const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<IAction>) => IDispatchProps = (dispatch, actions) => (
 	bindActionCreators(ActionCreators, dispatch)
 );
 
