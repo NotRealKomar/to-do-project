@@ -1,20 +1,22 @@
-import * as types from "../actions/types";
+import types from "../actions/types";
 import { IAction } from "../actions/loginActions";
 
+interface ILogin {
+    isLoggingIn: boolean;
+    loginError: boolean;
+    isAuthenticated: boolean;
+    isVerifying: boolean;
+    isLoggingOut: boolean;
+    logoutError: boolean;
+}
+
 export interface LoginState {
-    login?: any;
-    isLoggingIn?: false,
-    isLoggingOut?: false,
-    isVerifying?: false,
-    loginError?: false,
-    logoutError?: false,
-    isAuthenticated?: false,
-    user?: {},
+    login: ILogin;
 }
 
 const initialState = {}
 
-export default function(state = initialState, action: IAction) {
+export default (state = initialState, action: IAction) => {
     switch (action.type) {
         case types.LOGIN_REQUEST:
             return {
