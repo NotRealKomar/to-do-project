@@ -7,7 +7,7 @@ import { IAction } from '../actions/loginActions';
 import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 
 import ProtectedRoute from './login/ProtectedRoute';
-import Home from './Home';
+import List from './toDo/List';
 import Login from './login/Login';
 
 interface IStateProps {
@@ -32,7 +32,7 @@ const App: React.FC<Props> = (props) => {
 			<ProtectedRoute
 				exact
 				path="/"
-				component={Home}
+				component={List}
 				isAuthenticated={isAuthenticated}
 				isVerifying={isVerifying}
 			/>
