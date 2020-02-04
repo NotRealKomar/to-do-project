@@ -36,7 +36,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docker-build": "docker build -t to-do-container .",
-    "docker-start": "docker run --rm -it -p 3000:80 to-do-container:latest"
+    "docker-start": "docker run --rm -it -p 3000:3000 to-do-container:latest"
   },
   "eslintConfig": {
     "extends": "react-app"
