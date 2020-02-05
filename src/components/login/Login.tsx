@@ -50,11 +50,11 @@ const Login: React.FC<Props> = (props) => {
         <form onSubmit={handleOnSubmit}>
           <div className="container__login-input">
             <label htmlFor="EmailInput">Email</label>
-            <input id="EmailInput" placeholder="example@dot.com" onChange={handleOnEmailChange}></input>
+            <input id="EmailInput" autoComplete="username" placeholder="example@dot.com" onChange={handleOnEmailChange}></input>
           </div>
           <div className="container__login-input">
             <label htmlFor="PasswordInput">Password</label>
-            <input id="PasswordInput" type="password" placeholder="Password" onChange={handleOnPasswordChange}></input>
+            <input id="PasswordInput" autoComplete="current-password" type="password" placeholder="Password" onChange={handleOnPasswordChange}></input>
           </div>
           <button className="container__login-submit" type="submit">Login</button>
         </form>
