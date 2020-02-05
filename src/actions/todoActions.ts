@@ -10,80 +10,80 @@ export interface IAction extends Action {
   errorMessage?: string;
 }
 
-const requestAddItem = () => {
+const requestAddItem: () => IAction = () => {
   return {
     type: types.ADD_ITEM_REQUEST
   };
 };
 
-const receiveAddItem = (items: ToDo[]) => {
+const receiveAddItem: (items: ToDo[]) => IAction = (items) => {
   return {
     type: types.ADD_ITEM_SUCCESS,
     payload: items
   };
 };
 
-const addItemError = (errorMessage: string) => {
+const addItemError: (errorMessage: string) => IAction = (errorMessage) => {
   return {
     type: types.ADD_ITEM_FAILURE,
     errorMessage: errorMessage
   };
 };
 
-const requestGetItems = () => {
+const requestGetItems: () => IAction  = () => {
   return {
     type: types.GET_ITEMS_REQUEST
   };
 };
 
-const receiveGetItems = (items: ToDo[]) => {
+const receiveGetItems: (items: ToDo[]) => IAction = (items) => {
   return {
     type: types.GET_ITEMS_SUCCESS,
     payload: items
   };
 };
 
-const getItemsError = (errorMessage: string) => {
+const getItemsError: (errorMessage: string) => IAction = (errorMessage) => {
   return {
     type: types.GET_ITEMS_FAILURE,
     errorMessage: errorMessage
   };
 };
 
-const requestRemoveItem = () => {
+const requestRemoveItem: () => IAction  = () => {
   return {
     type: types.REMOVE_ITEMS_REQUEST
   };
 };
 
-const receiveRemoveItem = (items: ToDo[]) => {
+const receiveRemoveItem: (items: ToDo[]) => IAction = (items) => {
   return {
     type: types.REMOVE_ITEMS_SUCCESS,
     payload: items
   };
 };
 
-const removeItemError = (errorMessage: string) => {
+const removeItemError: (errorMessage: string) => IAction = (errorMessage) => {
   return {
     type: types.REMOVE_ITEMS_FAILURE,
     errorMessage: errorMessage
   };
 };
 
-const requestUpdateItem = () => {
+const requestUpdateItem: () => IAction  = () => {
   return {
     type: types.UPDATE_ITEM_REQUEST
   };
 };
 
-const receiveUpdateItem = (items: ToDo[]) => {
+const receiveUpdateItem: (items: ToDo[]) => IAction = (items) => {
   return {
     type: types.UPDATE_ITEM_SUCCESS,
     payload: items
   };
 };
 
-const updateItemError = (errorMessage: string) => {
+const updateItemError: (errorMessage: string) => IAction = (errorMessage) => {
   return {
     type: types.UPDATE_ITEM_FAILURE,
     errorMessage: errorMessage
