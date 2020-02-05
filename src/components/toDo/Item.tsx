@@ -12,10 +12,10 @@ interface IProps{
 }
 const ToDoItem: React.FC<IProps> = (props) => {
   const { item, onClick, onUpdate } = props;
-  const { title, content, datePublished } = item;
+  const { datePublished, title = '', content = '' } = item;
 
-  const [ itemTitle, setTitle ] = useState<string | undefined>(title);
-  const [ itemContent, setContent ] = useState<string | undefined>(content);
+  const [ itemTitle, setTitle ] = useState<string>(title);
+  const [ itemContent, setContent ] = useState<string>(content);
 
   const handleOnTitleFocusOut: (value: string) => void = (value) => {
     if(item.title !== value) {

@@ -11,9 +11,9 @@ interface IProps {
 }
 
 const EditableInput: React.FC<IProps> = (props) => {
-  const { value, placeholder, labelClassName, inputClassName, onChange, onFocusOut, type = 'text' } = props;
+  const { placeholder, labelClassName, inputClassName, onChange, onFocusOut, type = 'text', value = '' } = props;
   const [isEditing, setEditing] = useState<boolean>(false);
-  const [itemValue, setValue] = useState<string | undefined>(value); 
+  const [itemValue, setValue] = useState<string>(value); 
 
   const handlerOnValueChange: (event: ChangeEvent<HTMLInputElement>) => void = (event) => {
     const value = event.currentTarget.value;
