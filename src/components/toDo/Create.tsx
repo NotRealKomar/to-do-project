@@ -35,8 +35,8 @@ const CreateToDo: React.FC<IProps> = (props) => {
     setDescription(event.currentTarget.value);
   };
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
 
   return(
     <form className="create-form" onSubmit={handleOnSubmit}>

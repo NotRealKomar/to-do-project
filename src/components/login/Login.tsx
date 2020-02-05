@@ -21,8 +21,8 @@ type Props = IStateProps & IDispatchProps
 
 const Login: React.FC<Props> = (props) => {
   const { loginUser, isAuthenticated, isLoggingIn, loginError } = props; 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const handleOnEmailChange: (event: FormEvent<HTMLInputElement>) => void = (event) => {
     setEmail(event.currentTarget.value);

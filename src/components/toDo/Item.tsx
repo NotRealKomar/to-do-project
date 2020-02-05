@@ -14,8 +14,8 @@ const ToDoItem: React.FC<IProps> = (props) => {
   const { item, onClick, onUpdate } = props;
   const { title, content, datePublished } = item;
 
-  const [ itemTitle, setTitle ] = useState(title);
-  const [ itemContent, setContent ] = useState(content);
+  const [ itemTitle, setTitle ] = useState<string | undefined>(title);
+  const [ itemContent, setContent ] = useState<string | undefined>(content);
 
   const handleOnTitleFocusOut: (value: string) => void = (value) => {
     if(item.title !== value) {
