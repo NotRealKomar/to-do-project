@@ -11,45 +11,45 @@ import List from './toDo/List';
 import Login from './login/Login';
 
 interface IStateProps {
-	isAuthenticated: boolean;
-	isVerifying: boolean;
+  isAuthenticated: boolean;
+  isVerifying: boolean;
 }
 
 interface IDispatchProps {
-	verifyAuth: () => void;
+  verifyAuth: () => void;
 }
 
 type Props = IStateProps & IDispatchProps
 
 const App: React.FC<Props> = (props) => {
-	const { isAuthenticated, isVerifying, verifyAuth } = props;
-	useEffect(() => {
-		verifyAuth();
-	}, [ verifyAuth ]);
+  const { isAuthenticated, isVerifying, verifyAuth } = props;
+  useEffect(() => {
+    verifyAuth();
+  }, [ verifyAuth ]);
 
-	return (
-		<Switch>
-			<ProtectedRoute
-				exact
-				path="/"
-				component={List}
-				isAuthenticated={isAuthenticated}
-				isVerifying={isVerifying}
-			/>
-			<Route path="/login" component={Login} />
-		</Switch>
-	);
+  return (
+    <Switch>
+      <ProtectedRoute
+        exact
+        path="/"
+        component={List}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+      <Route path="/login" component={Login} />
+    </Switch>
+  );
 };
 
 const mapStateToProps: (state: LoginState) => IStateProps = (state) => (
-	{
-		isAuthenticated: state.login.isAuthenticated,
-		isVerifying: state.login.isVerifying
-	}
+  {
+    isAuthenticated: state.login.isAuthenticated,
+    isVerifying: state.login.isVerifying
+  }
 );
 
 const mapDispatchToProps: (dispatch: Dispatch, actions: ActionCreator<IAction>) => IDispatchProps = (dispatch, actions) => (
-	bindActionCreators(ActionCreators, dispatch)
+  bindActionCreators(ActionCreators, dispatch)
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

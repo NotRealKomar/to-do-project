@@ -1,7 +1,6 @@
-
-export default class ToDo{
-    id: string = '';
-    title?: string;
-    content?: string;
-    datePublished?: Date;
+export default class ToDo {
+  id: string = '';
+  title?: string;
+  content?: string;
+  datePublished?: Date;
 }
