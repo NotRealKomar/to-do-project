@@ -7,18 +7,22 @@ interface IProps {
 	labelClassName: string;
 	inputClassName: string;
 	onChange: (value: string) => void;
-	onFocusOut?: (value: string) => void;
+	onFocusOut: (value: string) => void;
 }
 
 const EditableInput: React.FC<IProps> = (props) => {
 	const { value, placeholder, labelClassName, inputClassName, onChange, onFocusOut, type = 'text' } = props;
 	const [isEditing, setEditing] = useState(false);
+	const [itemValue, setValue] = useState(value); 
 
 	const handlerOnValueChange: (event: ChangeEvent<HTMLInputElement>) => void = (event) => {
-		onChange(event.currentTarget.value);
+		const value = event.currentTarget.value;
+		setValue(value);
+		onChange(value);
 	};
 
 	const handleOnBlur: (event: React.FocusEvent<HTMLDivElement>) => void = (event) => {
+		itemValue && onFocusOut(itemValue);
 		setEditing(false);
 	};
 

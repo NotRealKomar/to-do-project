@@ -70,6 +70,26 @@ const removeItemError = (errorMessage: string) => {
 	};
 };
 
+const requestUpdateItem = () => {
+	return {
+		type: types.UPDATE_ITEM_REQUEST,
+	};
+};
+
+const receiveUpdateItem = (items: ToDo[]) => {
+	return {
+		type: types.UPDATE_ITEM_SUCCESS,
+		payload: items,
+	};
+};
+
+const updateItemError = (errorMessage: string) => {
+	return {
+		type: types.UPDATE_ITEM_FAILURE,
+		errorMessage: errorMessage,
+	};
+};
+
 export const addItem = (item: ToDo) => async (dispatch: Dispatch<IAction>) => {
 	try {
 		dispatch(requestAddItem());
@@ -100,5 +120,16 @@ export const getItems = () => async (dispatch: Dispatch<IAction>) => {
 	}
 	catch (error) {
 		dispatch(getItemsError((error as Error).message));
+	}
+};
+
+export const updateItem = (item: ToDo) => async (dispatch: Dispatch<IAction>) => {
+	try {
+		dispatch(requestUpdateItem());
+		const items = await toDoService.updateItem(item);
+		dispatch(receiveUpdateItem(items));
+	}
+	catch (error) {
+		dispatch(updateItemError((error as Error).message));
 	}
 };

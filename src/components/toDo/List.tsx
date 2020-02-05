@@ -13,6 +13,7 @@ import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 interface IDispatchProps {
 	getItems: () => void;
 	removeItem: (item: ToDo) => void;
+	updateItem: (item: ToDo) => void;
 }
 
 interface IStateProps {
@@ -23,7 +24,7 @@ interface IStateProps {
 type Props = IStateProps & IDispatchProps
 
 const ToDoList: React.FC<Props> = (props) => {
-	const { getItems, removeItem, items, isLoading } = props;
+	const { getItems, removeItem, updateItem, items, isLoading } = props;
 
 	useEffect(() => {
 		getItems();
@@ -31,6 +32,10 @@ const ToDoList: React.FC<Props> = (props) => {
 
 	const handleOnRemove: (item: ToDo) => void = (item) => {
 		removeItem(item);
+	};
+
+	const handleOnUpdate: (item: ToDo) => void = (item) => {
+		updateItem(item);
 	};
 	
 	return (
@@ -40,7 +45,12 @@ const ToDoList: React.FC<Props> = (props) => {
 			<div className="list">
 				<div className="list__main">
 					{items && items.map(item => 
-						<Item key={item.id} item={item} onClick={handleOnRemove}/>
+						<Item 
+							key={item.id} 
+							item={item} 
+							onClick={handleOnRemove}
+							onUpdate={handleOnUpdate}
+						/>
 					)}
 				</div>
 				<div className="list__info">
