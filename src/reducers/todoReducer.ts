@@ -77,6 +77,26 @@ export default (state = initialState, action: IAction) => {
 			removeError: true,
 		};
 	}
+	case types.UPDATE_ITEM_REQUEST: {
+		return {
+			...state,
+			isLoading: true,
+		};
+	}
+	case types.UPDATE_ITEM_SUCCESS: {
+		return {
+			...state,
+			isLoading: false,
+			items: action.payload,
+		};
+	}
+	case types.UPDATE_ITEM_FAILURE: {
+		return {
+			...state,
+			isLoading: false,
+			updateError: true,
+		};
+	}
 	default: {
 		return state;
 	}
