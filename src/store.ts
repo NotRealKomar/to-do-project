@@ -10,14 +10,14 @@ const initialState = {};
 const middleware = [thunk];
 
 export const configureStore = (persistedState = initialState) => {
-	const store = createStore(
-		rootReducer,
-		persistedState,
-		composeWithDevTools(
-			applyMiddleware(...middleware),
-			applyMiddleware(logger, crashReporter),
-		)
-	);
+  const store = createStore(
+    rootReducer,
+    persistedState,
+    composeWithDevTools(
+      applyMiddleware(...middleware),
+      applyMiddleware(logger, crashReporter)
+    )
+  );
 
-	return store;
+  return store;
 };
