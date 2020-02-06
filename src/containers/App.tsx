@@ -6,8 +6,8 @@ import * as ActionCreators from '../actions/loginActions';
 import { IAction } from '../actions/loginActions';
 import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 
-import ProtectedRoute from './login/ProtectedRoute';
-import List from './toDo/List';
+import ProtectedRoute from '../components/login/ProtectedRoute';
+import List from './login/List';
 import Login from './login/Login';
 
 interface IStateProps {

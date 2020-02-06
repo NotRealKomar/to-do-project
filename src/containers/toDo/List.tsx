@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import '../../styles/list.scss';
-import Item from './Item';
+import Item from '../../components/toDo/Item';
 import Header from './Header';
 import ToDo from '../../models/ToDo';
 import CreateToDo from './Create';

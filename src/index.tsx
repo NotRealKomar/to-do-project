@@ -5,7 +5,7 @@ import { configureStore } from './store';
 import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
 
-import App from './components/App';
+import App from './containers/App';
 
 const store = configureStore();
 const history = createBrowserHistory();
