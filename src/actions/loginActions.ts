@@ -8,50 +8,50 @@ export interface IAction extends Action {
     user?: firebase.User;
 }
 
-const requestLogin = () => {
+const requestLogin: () => IAction = () => {
   return {
     type: types.LOGIN_REQUEST
   };
 };
 
-const receiveLogin = (user: firebase.User) => {
+const receiveLogin: (user: firebase.User) => IAction = (user) => {
   return {
     type: types.LOGIN_SUCCESS,
     user
   };
 };
 
-const loginError = () => {
+const loginError: () => IAction  = () => {
   return {
     type: types.LOGIN_FAILURE
   };
 };
 
-const requestLogout = () => {
+const requestLogout: () => IAction  = () => {
   return {
     type: types.LOGOUT_REQUEST
   };
 };
 
-const receiveLogout = () => {
+const receiveLogout: () => IAction  = () => {
   return {
     type: types.LOGOUT_SUCCESS
   };
 };
 
-const logoutError = () => {
+const logoutError: () => IAction  = () => {
   return {
     type: types.LOGOUT_FAILURE
   };
 };
 
-const verifyRequest = () => {
+const verifyRequest: () => IAction  = () => {
   return {
     type: types.VERIFY_REQUEST
   };
 };
 
-const verifySuccess = () => {
+const verifySuccess: () => IAction  = () => {
   return {
     type: types.VERIFY_SUCCESS
   };
