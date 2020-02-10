@@ -14,7 +14,9 @@ export interface LoginState {
     login: ILogin;
 }
 
-const initialState = {};
+const initialState = {
+  isAuthenticated: false
+};
 
 export default (state = initialState, action: IAction) => {
   switch (action.type) {
