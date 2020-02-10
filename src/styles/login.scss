@@ -1,12 +1,11 @@
 @import "variables.scss";
-@import "./fontawesome/fontawesome.scss";
-@import "./fontawesome/solid.scss";
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: $font-text;
+  margin-top: 1rem;
 
   &__login {
     width: 480px;
