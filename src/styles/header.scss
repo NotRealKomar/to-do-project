@@ -1,0 +1,44 @@
+@import "./variables.scss";
+@import "./fontawesome/fontawesome.scss";
+@import "./fontawesome/solid.scss";
+
+.header {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-family: $font-text;
+
+    &__content {
+        padding-left: 20px;
+        color: $header-text-color;
+        font-size: x-large;
+    }
+
+    &_light {
+        background-color: $header-background-color;
+    }
+
+    &__button-logout {
+        margin-right: 1rem;
+        display: inline-flex;
+        border: 2px solid $border-color;
+        background-color: $button-color;
+        color: $info-text-color;
+        font-family: $font-text;
+        border-radius: 2px;
+        transition-duration: 0.4s;
+
+        &:hover{
+            background-color: $info-text-color;
+            color: $button-color;
+        }
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+        &__content {
+            font-size: large;
+        }
+    }
+}
