@@ -1,11 +1,11 @@
-import React from 'react';
-import '../../styles/header.scss';
-import '../../styles/fontawesome/fontawesome.scss';
+import React, { useEffect } from 'react';
 import { Dispatch, ActionCreator, bindActionCreators } from 'redux';
-import * as ActionCreators from '../../actions/loginActions';
-import { IAction } from '../../actions/loginActions';
+import * as ActionCreators from '../actions/loginActions';
+import { IAction } from '../actions/loginActions';
 import { connect } from 'react-redux';
-import { LoginState } from '../../reducers/loginReducer';
+import { LoginState } from '../reducers/loginReducer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboardList } from '@fortawesome/free-solid-svg-icons';
 
 interface IDispatchProps {
   logoutUser: () => void;
@@ -14,21 +14,24 @@ interface IDispatchProps {
 interface IStateProps {
   isLoggingOut: boolean;
   logoutError: boolean;
+  isAuthenticated: boolean;
 }
 
 type Props = IDispatchProps & IStateProps
 
 const Header: React.FC<Props> = (props) => {
-  const { logoutUser } = props;
+  const { logoutUser, isAuthenticated } = props;
 
   return (
     <header className="header header_light">
       <h4 className="header__content">
-          [<i className="fas fa-clipboard-list"></i>]
+          [<FontAwesomeIcon icon={faClipboardList} />]
           To-Dooooooooo...ooo
       </h4>
 
-      <button className="header__button-logout" onClick={logoutUser}>Logout</button>
+      {isAuthenticated && (
+        <button className="header__button-logout" onClick={logoutUser}>Logout</button>
+      )}
     </header>
   );
 };
@@ -36,7 +39,8 @@ const Header: React.FC<Props> = (props) => {
 const mapStateToProps: (state: LoginState) => IStateProps = (state) => (
   {
     isLoggingOut: state.login.isLoggingOut,
-    logoutError: state.login.logoutError
+    logoutError: state.login.logoutError,
+    isAuthenticated: state.login.isAuthenticated
   }
 );
 
