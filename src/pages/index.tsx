@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-import '../../styles/list.scss';
-import Item from '../../components/toDo/Item';
-import Header from './Header';
-import ToDo from '../../models/ToDo';
-import CreateToDo from './Create';
+import Item from '../components/toDo/Item';
+import ToDo from '../models/ToDo';
+import CreateToDo from '../containers/toDo/Create';
 import { connect } from 'react-redux';
-import { ToDoState } from '../../reducers/todoReducer';
-import * as ActionCreators from '../../actions/todoActions';
-import { IAction } from '../../actions/todoActions';
+import { ToDoState } from '../reducers/todoReducer';
+import * as ActionCreators from '../actions/todoActions';
+import { IAction } from '../actions/todoActions';
 import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import Head from 'next/head';
 
 interface IDispatchProps {
   getItems: () => void;
@@ -40,7 +41,9 @@ const ToDoList: React.FC<Props> = (props) => {
   
   return (
     <>
-      <Header />
+      <Head>
+        <title>ToDo main page</title>
+      </Head>
       <CreateToDo />
       <div className="list">
         <div className="list__main">
@@ -59,11 +62,11 @@ const ToDoList: React.FC<Props> = (props) => {
             <hr />
             <li>
               {(items) ? (items.length) : (<span>No</span>)} to-do&apos;s
-              [<i className="fas fa-thumbs-up"></i>]
+              [<FontAwesomeIcon icon={faThumbsUp} />]
             </li>
             <li>
               {new Date().toDateString()}
-              [<i className="fas fa-clock"></i>]
+              [<FontAwesomeIcon icon={faClock} />]
             </li>
             <hr />
             {isLoading && (<li>Loading...</li>)}
