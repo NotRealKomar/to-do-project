@@ -1,5 +1,4 @@
 import React, { useState, FormEvent } from 'react';
-import '../../styles/create.scss';
 import { Guid } from 'guid-typescript';
 import * as ActionCreators from '../../actions/todoActions';
 import { IAction } from '../../actions/todoActions';

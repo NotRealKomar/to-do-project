@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import ToDo from '../../models/ToDo';
 import EditableInput from '../EditableInput';
-import '../../styles/item.scss';
-import '../../styles/fontawesome/fontawesome.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 interface IProps{
   item: ToDo;
@@ -44,7 +44,7 @@ const ToDoItem: React.FC<IProps> = (props) => {
           />
         </h4>
         <div className="item__logo_close">
-          <i className="fas fa-times" onClick={() => onClick(item)} />
+          <FontAwesomeIcon icon={faTimes} onClick={() => onClick(item)}/>
         </div>
       </div>
       <div className="item__content">

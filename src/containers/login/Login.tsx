@@ -5,7 +5,6 @@ import { Redirect } from 'react-router';
 import { Dispatch, bindActionCreators, ActionCreator } from 'redux';
 import * as ActionCreators from '../../actions/loginActions';
 import { IAction } from '../../actions/loginActions';
-import '../../styles/login.scss';
 
 interface IStateProps {
   isAuthenticated: boolean;
